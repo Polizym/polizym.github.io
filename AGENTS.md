@@ -2,10 +2,14 @@
 
 Estas instrucciones aplican únicamente a este proyecto y a su repositorio dedicado. POLIZYM y Lucuma Records deben permanecer completamente independientes.
 
+- Carpeta local: `C:\Users\Usuario\Desktop\Polizym-Web`.
+- Remoto autorizado: `https://github.com/Polizym/polizym.github.io.git` (`origin`).
+- Sitio público: `https://polizym.github.io/`.
+
 ## Flujo de trabajo
 
 - Antes de cualquier operación de Git, confirmar que la carpeta de trabajo y la raíz del repositorio correspondan a `Polizym-Web`.
-- Comprobar que el remoto de publicación sea el repositorio dedicado a POLIZYM. No inferir ni inventar una URL. No operar sobre repositorios ni archivos de Lucuma Records.
+- Comprobar que `origin` sea exactamente `https://github.com/Polizym/polizym.github.io.git` y que la raíz del repositorio sea la carpeta local de POLIZYM. No inferir ni inventar una URL. No operar sobre repositorios ni archivos de Lucuma Records.
 - Analizar los archivos existentes antes de cada cambio. Implementar la solución más sencilla y mantenible, respetando el diseño y el contenido aprobados.
 - Verificar los cambios y la compatibilidad con GitHub Pages antes de guardarlos en Git.
 - Al completar una tarea, crear un commit claro y descriptivo y ejecutar `git push origin main` únicamente si el remoto POLIZYM está confirmado y las comprobaciones pasan.
@@ -19,7 +23,7 @@ Estas instrucciones aplican únicamente a este proyecto y a su repositorio dedic
 - Este es un sitio institucional estático. Mantener HTML, CSS y JavaScript sencillos; no añadir CMS, frameworks, bases de datos ni servidores innecesarios.
 - Mantener `index.html` en la raíz y usar rutas de recursos compatibles con GitHub Pages.
 - Conservar la posibilidad de abrir `index.html` directamente en Chrome, sin Python.
-- El destino previsto es GitHub Pages desde la rama `main` y la carpeta raíz (`/`). Comprobar la configuración de Pages cuando sea posible e informar si falta activación manual.
+- El destino es `https://polizym.github.io/`, publicado por GitHub Pages desde la rama `main` y la carpeta raíz (`/`). Comprobar la configuración de Pages cuando sea posible e informar si falta activación manual.
 - No publicar automáticamente mediante cambios a la configuración de privacidad, permisos, dominios o seguridad.
 
 ## Entrega

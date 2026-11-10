@@ -1,6 +1,6 @@
 # POLIZYM — sitio institucional
 
-Sitio estático de una sola página, preparado para GitHub Pages. No requiere compilación ni dependencias.
+Sitio estático de una sola página para POLIZYM. El repositorio es [Polizym/polizym.github.io](https://github.com/Polizym/polizym.github.io) y el sitio público está en [https://polizym.github.io/](https://polizym.github.io/). No requiere compilación ni dependencias.
 
 ## Verlo localmente
 
