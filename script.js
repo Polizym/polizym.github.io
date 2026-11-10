@@ -35,9 +35,25 @@ nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
 
 const config = window.POLIZYM_CONFIG || {};
 if (config.whatsappE164 && /^\+[1-9]\d{7,14}$/.test(config.whatsappE164)) {
-  const link = document.querySelector(".whatsapp-link");
-  link.href = `https://wa.me/${config.whatsappE164.slice(1)}`;
-  link.target = "_blank"; link.rel = "noopener noreferrer"; link.hidden = false;
+  const number = config.whatsappE164.replace(/\D/g, "");
+  const message = "Hola, quisiera consultar por un presupuesto en Polizym.";
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+  const links = [document.querySelector(".whatsapp-link"), document.querySelector(".whatsapp-float")];
+  links.forEach(link => {
+    link.href = url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.hidden = false;
+  });
+
+  const floatingLink = document.querySelector(".whatsapp-float");
+  const quoteForm = document.querySelector("#quote-form");
+  if ("IntersectionObserver" in window && floatingLink && quoteForm) {
+    const formVisibility = new IntersectionObserver(([entry]) => {
+      floatingLink.classList.toggle("is-form-visible", entry.isIntersecting);
+    }, { threshold: 0.12 });
+    formVisibility.observe(quoteForm);
+  }
 }
 
 document.querySelector("#quote-form").addEventListener("submit", event => {
