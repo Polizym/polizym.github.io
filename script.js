@@ -33,17 +33,71 @@ nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
   menuButton.setAttribute("aria-expanded", "false"); menuButton.setAttribute("aria-label", "Abrir menú"); nav.classList.remove("is-open");
 }));
 
-const config = window.POLIZYM_CONFIG || {};
+const quoteForm = document.querySelector("#quote-form");
+const formStatus = document.querySelector("#form-status");
+const quoteEmail = "polizymsaci@gmail.com";
+const quoteSubject = "Solicitud de presupuesto - Polizym";
+const quoteFields = [
+  ["nombre", "Nombre"],
+  ["empresa", "Empresa o emprendimiento"],
+  ["email", "Email"],
+  ["telefono", "Teléfono"],
+  ["producto", "Tipo de producto"],
+  ["cantidad", "Cantidad estimada"],
+  ["mensaje", "Mensaje o descripción del pedido"]
+];
 
-document.querySelector("#quote-form").addEventListener("submit", event => {
+function buildQuote(data) {
+  const body = quoteFields
+    .map(([name, label]) => `${label}: ${String(data.get(name) || "").trim() || "No indicado"}`)
+    .join("\r\n");
+  const copyText = `Para: ${quoteEmail}\r\nAsunto: ${quoteSubject}\r\n\r\n${body}`;
+  const mailto = `mailto:${quoteEmail}?subject=${encodeURIComponent(quoteSubject)}&body=${encodeURIComponent(body)}`;
+  return { body, copyText, mailto };
+}
+
+quoteForm.addEventListener("submit", event => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  const fields = ["nombre", "empresa", "email", "telefono", "producto", "cantidad", "mensaje"];
-  const labels = { nombre: "Nombre", empresa: "Empresa o emprendimiento", email: "Email", telefono: "Teléfono", producto: "Tipo de producto", cantidad: "Cantidad estimada", mensaje: "Mensaje" };
-  const body = fields.map(key => `${labels[key]}: ${data.get(key) || "No indicado"}`).join("\n");
-  const subject = encodeURIComponent(`Consulta desde la web - ${data.get("nombre")}`);
-  window.location.href = `mailto:${encodeURIComponent(config.email || "polizymsaci@gmail.com")}?subject=${subject}&body=${encodeURIComponent(body)}`;
-  document.querySelector("#form-status").textContent = "Tu aplicación de correo debería abrirse con la consulta preparada.";
+  const { mailto } = buildQuote(data);
+  formStatus.textContent = "Intentando abrir tu aplicación de correo. Revisá la consulta y confirmá el envío; si no se abre, usá «Copiar consulta».";
+  window.location.href = mailto;
+});
+
+async function copyQuoteToClipboard(text) {
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const temporaryField = document.createElement("textarea");
+  temporaryField.value = text;
+  temporaryField.setAttribute("readonly", "");
+  temporaryField.style.position = "fixed";
+  temporaryField.style.left = "0";
+  temporaryField.style.top = "0";
+  temporaryField.style.opacity = "0.01";
+  temporaryField.style.fontSize = "16px";
+  document.body.append(temporaryField);
+  temporaryField.focus();
+  temporaryField.select();
+  temporaryField.setSelectionRange(0, temporaryField.value.length);
+  const copied = document.execCommand("copy");
+  temporaryField.remove();
+  if (!copied) throw new Error("No se pudo copiar al portapapeles.");
+}
+
+document.querySelector("#copy-consultation").addEventListener("click", async () => {
+  if (!quoteForm.reportValidity()) return;
+
+  const { copyText } = buildQuote(new FormData(quoteForm));
+  try {
+    await copyQuoteToClipboard(copyText);
+    formStatus.textContent = `Consulta copiada. Pegala en tu correo y enviala a ${quoteEmail}.`;
+  } catch {
+    window.prompt("No se pudo copiar automáticamente. Copiá la consulta completa:", copyText);
+    formStatus.textContent = `Si no pudiste copiarla desde la ventana, volvé a intentarlo. El destinatario es ${quoteEmail}.`;
+  }
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
