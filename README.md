@@ -10,11 +10,18 @@ Abrí `index.html` directamente en Google Chrome o en otro navegador moderno. No
 
 - `index.html`: contenido, navegación, metadatos y estructura de secciones.
 - `styles.css`: identidad visual, composición responsive y estilos de accesibilidad.
-- `script.js`: menú móvil, tarjetas de productos, formulario mailto y año del pie.
-- `config.js`: email y número de WhatsApp configurable.
+- `script.js`: menú móvil, tarjetas de productos, formulario AJAX con FormSubmit y año del pie.
+- `config.js`: email y número confirmado de WhatsApp.
 - `assets/polizym.png`: logotipo original proporcionado para este proyecto.
 
-El número de WhatsApp queda desactivado (`null`) hasta que se confirme su formato internacional. Al validarlo, actualizá `whatsappE164` en `config.js` con el número en formato `+549...`.
+## SEO e indexación
+
+El sitio incluye `sitemap.xml`, `robots.txt`, URL canónica y datos estructurados de organización. En Google Search Console:
+
+1. Añadí una propiedad de tipo **Prefijo de URL** con `https://polizym.github.io/`.
+2. Elegí el método **Archivo HTML** y descargá el archivo exacto que genere Google. Colocalo en la raíz del repositorio sin cambiar su nombre ni contenido, publicalo y comprobá que su URL pública abra sin iniciar sesión; luego pulsá **Verificar**. Como alternativa, elegí **Etiqueta HTML** y enviá la etiqueta generada para agregarla sin cambios dentro de `<head>` en `index.html`; publicá y luego pulsá **Verificar**. Google exige usar el archivo o la etiqueta exactos generados para esa propiedad. No hay un código de verificación incluido todavía.
+3. Cuando la propiedad esté verificada, abrí **Sitemaps**, enviá `sitemap.xml` y revisá el resultado en Search Console.
+4. En **Inspección de URLs**, probá la URL principal y, cuando esté disponible, solicitá su indexación. La presencia en el sitemap o la solicitud no garantiza que Google indexe la página.
 
 ## Imágenes
 
