@@ -10,11 +10,9 @@
 .brand{width:auto;height:58px;flex-direction:row;justify-content:flex-start;gap:10px;overflow:visible}
 .brand-symbol{width:49px;height:49px;flex:0 0 49px;display:block;overflow:hidden;background:#fff}
 .brand-symbol img{width:100%;height:100%;object-fit:cover;object-position:center 44%;mix-blend-mode:multiply}
-.brand-wordmark{display:flex;flex-direction:column;color:#202020;font:800 19px/.98 var(--display);letter-spacing:.025em}
-.brand-wordmark small{margin-top:5px;font:700 7px/1 var(--font);letter-spacing:.16em;color:#686868}
+.brand-wordmark{display:block;color:#202020;font:800 19px/1 var(--display);letter-spacing:.025em}
 .footer-brand .brand-symbol{border:1px solid rgba(255,255,255,.16)}
 .footer-brand .brand-wordmark{color:#fff}
-.footer-brand .brand-wordmark small{color:#b7b7b7}
 html{scroll-padding-top:108px}
 #nosotros,#productos,#contacto{scroll-margin-top:108px}
 .section-kicker{font-size:10px;color:#68696b}
@@ -33,7 +31,6 @@ html{scroll-padding-top:108px}
   .brand{height:54px;gap:8px}
   .brand-symbol{width:43px;height:43px;flex-basis:43px}
   .brand-wordmark{font-size:17px}
-  .brand-wordmark small{font-size:6px}
   html{scroll-padding-top:84px}
   #nosotros,#productos,#contacto{scroll-margin-top:84px}
   .section-kicker{font-size:8px;gap:8px}
