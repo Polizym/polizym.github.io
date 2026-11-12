@@ -54,5 +54,12 @@ html{scroll-padding-top:108px}
 .button-copy{background:#fff;color:var(--ink);border:1px solid #d6d6d3;gap:18px}
 .button-copy:hover{background:#f0f0ee}
 .form-note a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.form-privacy{margin:10px 0 0;color:#686868;font-size:10px;line-height:1.6}
+.form-privacy a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.form-honey{display:none!important}
+.form-submit:disabled{cursor:wait;opacity:.72;transform:none}
+.form-status[data-state="sending"]{color:#686868}
+.form-status[data-state="success"]{color:#286336}
+.form-status[data-state="error"]{color:#a12622}
 @media(max-width:640px){.whatsapp-float{right:16px;right:max(16px,env(safe-area-inset-right,0px));bottom:16px;bottom:max(16px,env(safe-area-inset-bottom,0px))}}
 @media(max-width:640px){.form-row{grid-template-columns:1fr}.contact-form label{font-size:12px}.contact-form input,.contact-form select,.contact-form textarea{min-height:44px;padding:11px;font-size:16px}.contact-form textarea{min-height:120px}.form-actions{display:grid;grid-template-columns:1fr;gap:10px}.form-actions .button{width:100%;justify-content:space-between}}

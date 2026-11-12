@@ -56,12 +56,44 @@ function buildQuote(data) {
   return { body, copyText, mailto };
 }
 
-quoteForm.addEventListener("submit", event => {
+const submitButton = quoteForm.querySelector(".form-submit");
+const submitButtonLabel = submitButton.innerHTML;
+
+quoteForm.addEventListener("submit", async event => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const { mailto } = buildQuote(data);
-  formStatus.textContent = "Intentando abrir tu aplicación de correo. Revisá la consulta y confirmá el envío; si no se abre, usá «Copiar consulta».";
-  window.location.href = mailto;
+  if (!quoteForm.reportValidity()) return;
+
+  const data = Object.fromEntries(new FormData(quoteForm).entries());
+  const submitUrl = quoteForm.action;
+  submitButton.disabled = true;
+  submitButton.textContent = "Enviando consulta...";
+  quoteForm.setAttribute("aria-busy", "true");
+  formStatus.dataset.state = "sending";
+  formStatus.textContent = "Enviando consulta...";
+
+  try {
+    const response = await fetch(submitUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (!response.ok || !(result.success === true || result.success === "true")) {
+      throw new Error("El servicio no aceptó la consulta.");
+    }
+    formStatus.dataset.state = "success";
+    formStatus.textContent = "FormSubmit aceptó la consulta. La entrega al correo depende de la activación y el procesamiento del servicio.";
+  } catch {
+    formStatus.dataset.state = "error";
+    formStatus.textContent = "No se pudo confirmar el envío. Tus datos siguen en el formulario; podés reintentar o usar «Copiar consulta».";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = submitButtonLabel;
+    quoteForm.removeAttribute("aria-busy");
+  }
 });
 
 async function copyQuoteToClipboard(text) {
