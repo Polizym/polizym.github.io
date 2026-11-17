@@ -79,3 +79,27 @@ html{scroll-padding-top:108px}
   .header-inner .brand-symbol{width:54px;height:54px;flex-basis:54px}
   .header-inner .brand-wordmark{font-size:21.5px}
 }
+
+/* Presentación del proceso de consulta comercial. */
+.how-section{padding-block:100px;background:#fff}
+.how-heading{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:8%;margin:36px 0 40px}
+.how-heading .eyebrow{margin-bottom:14px}
+.how-heading h2{font:600 clamp(36px,4vw,50px)/1.12 var(--display);letter-spacing:-.045em;margin:0}
+.how-intro{max-width:500px;margin:0 0 5px;color:var(--muted);font-size:14px;line-height:1.8}
+.work-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0;padding:0;list-style:none}
+.work-steps li{border-top:1px solid var(--line);padding:19px 5px 0}
+.step-number{display:block;color:var(--red);font-size:12px;font-weight:700;letter-spacing:.12em}
+.work-steps h3{margin:12px 0 7px;font:600 19px/1.35 var(--display);letter-spacing:-.025em;color:var(--ink)}
+.work-steps p{max-width:360px;margin:0;color:var(--muted);font-size:13px;line-height:1.8}
+.how-cta{display:inline-block;margin-top:30px}
+@media(max-width:640px){
+  .how-section{padding-block:76px}
+  .how-heading{display:block;margin:31px 0 29px}
+  .how-heading h2{font-size:39px}
+  .how-intro{margin-top:15px;font-size:12px}
+  .work-steps{grid-template-columns:1fr;gap:23px}
+  .work-steps li{padding:16px 0 0}
+  .work-steps h3{margin:9px 0 5px;font-size:18px}
+  .work-steps p{font-size:12px}
+  .how-cta{margin-top:24px}
+}
